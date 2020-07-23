@@ -16,14 +16,22 @@ class ToDoPage extends Component {
 
   render() {
     const { listTodo } = this.state;
-    console.log(this.props)
-    const {match} = this.props
+    console.log(this.props.location)
+    const {match, location} = this.props
     return (
       listTodo && (
         <ul>
           {listTodo.map(({ id, title }) => (
             <li key={id}>
-                <Link to={`${match.url}/${id}`}>
+                {/* <Link 
+                to={`${match.url}/${id}`}>
+              <h3>{title}</h3>
+                </Link> */}
+                <Link 
+                to={{
+                  pathname: `${match.url}/${id}`,
+                  state: {from: location}
+                }}>
               <h3>{title}</h3>
                 </Link>
             </li>
