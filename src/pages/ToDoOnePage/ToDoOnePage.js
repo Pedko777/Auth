@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getOnetoDo } from '../../services/Api';
+import { getOnetoDo, controller } from '../../services/Api';
 import ToDoInfo from "../../components/ToDoInfo/ToDoInfo"
 import {Route, Link} from "react-router-dom"
 
@@ -21,6 +21,10 @@ class ToDoOnePage extends Component {
       .catch(error => console.log(error));
   }
 
+  componentWillMount() {
+    controller.abort()
+  }
+
   handleGoBack = () => {
     const prevLocation = this.props.location.state?.from;
     //  const prevLocation = this.props.location.state && this.props.location.state.from;
@@ -33,7 +37,7 @@ class ToDoOnePage extends Component {
 
   render() {
     // console.log(this.props.location);
-    const { id, title, text } = this.state;
+    const {  title, text } = this.state;
     const {match, location} = this.props
     return (
       <div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { getNews } from '../../services/Api';
+import { getNews, controller } from '../../services/Api';
 
 const NewsPageHook = () => {
   const [listNews, setListNews] = useState([]);
@@ -9,6 +9,10 @@ const NewsPageHook = () => {
     getNews()
       .then(data => setListNews(data.articles))
       .catch(error => console.log(error));
+
+    return () => {
+      controller.abort()
+    }
   }, []);
 
   return (

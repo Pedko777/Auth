@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getNews } from '../../services/Api';
+import { getNews, controller } from '../../services/Api';
 
 class NewsPage extends Component {
   state = {
@@ -14,6 +14,10 @@ class NewsPage extends Component {
         this.setState({ listNews: data.articles });
       })
       .catch(error => console.log(error));
+  }
+
+  componentWillMount() {
+    controller.abort()
   }
 
   render() {
